@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="day">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sadia Scientific Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    try {
+      var theme = localStorage.getItem("sadia-theme");
+      if (theme === "night" || theme === "day") {
+        document.documentElement.dataset.theme = theme;
+      }
+    } catch (err) {
+      /* keep day theme */
+    }
+  </script>
+</head>
+<body>
+  <div class="background-decorations" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <main class="stage">
+    <section class="calc" aria-label="Sadia scientific calculator">
+      <header class="top">
+        <div class="brand">
+          <div class="brand-badge">
+            <span class="sparkle-icon" aria-hidden="true">✨</span>
+            <p class="brand-name">Sadia</p>
+          </div>
+          <p class="brand-sub">Scientific</p>
+        </div>
+        <div class="segment" role="group" aria-label="Theme selector">
+          <button type="button" id="dayBtn" data-theme-set="day" aria-pressed="true">🌸 Blush</button>
+          <button type="button" id="nightBtn" data-theme-set="night" aria-pressed="false">🌙 Berry</button>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="screen-meta">
+          <div class="segment angle" role="group" aria-label="Angle unit">
+            <button type="button" id="degBtn" data-angle="DEG" aria-pressed="true">DEG</button>
+            <button type="button" id="radBtn" data-angle="RAD" aria-pressed="false">RAD</button>
+          </div>
+          <p id="expr" class="expr"></p>
+        </div>
+        <p id="result" class="result" aria-live="polite">0</p>
+      </div>
+
+      <div class="keys">
+        <button type="button" class="key fn" data-act="fn" data-value="sin">sin</button>
+        <button type="button" class="key fn" data-act="fn" data-value="cos">cos</button>
+        <button type="button" class="key fn" data-act="fn" data-value="tan">tan</button>
+        <button type="button" class="key fn" data-act="fn" data-value="ln">ln</button>
+        <button type="button" class="key fn" data-act="fn" data-value="log">log</button>
+
+        <button type="button" class="key fn" data-act="fn" data-value="asin">sin⁻¹</button>
+        <button type="button" class="key fn" data-act="fn" data-value="acos">cos⁻¹</button>
+        <button type="button" class="key fn" data-act="fn" data-value="atan">tan⁻¹</button>
+        <button type="button" class="key fn" data-act="fn" data-value="sqrt">√</button>
+        <button type="button" class="key fn" data-act="postfix" data-value="square">x²</button>
+
+        <button type="button" class="key fn" data-act="const" data-value="pi">π</button>
+        <button type="button" class="key fn" data-act="const" data-value="e">e</button>
+        <button type="button" class="key fn" data-act="paren" data-value="(">(</button>
+        <button type="button" class="key fn" data-act="paren" data-value=")">)</button>
+        <button type="button" class="key fn" data-act="op" data-value="^">xʸ</button>
+
+        <button type="button" class="key fn" data-act="postfix" data-value="fact">n!</button>
+        <button type="button" class="key fn" data-act="postfix" data-value="percent">%</button>
+        <button type="button" class="key fn" data-act="recip">1/x</button>
+        <button type="button" class="key fn" data-act="fn" data-value="abs">|x|</button>
+        <button type="button" class="key fn" data-act="fn" data-value="exp">eˣ</button>
+
+        <button type="button" class="key digit" data-act="digit" data-value="7">7</button>
+        <button type="button" class="key digit" data-act="digit" data-value="8">8</button>
+        <button type="button" class="key digit" data-act="digit" data-value="9">9</button>
+        <button type="button" class="key ac" data-act="del" aria-label="Backspace">⌫</button>
+        <button type="button" class="key ac" data-act="clear">AC</button>
+
+        <button type="button" class="key digit" data-act="digit" data-value="4">4</button>
+        <button type="button" class="key digit" data-act="digit" data-value="5">5</button>
+        <button type="button" class="key digit" data-act="digit" data-value="6">6</button>
+        <button type="button" class="key op" data-act="op" data-value="*">×</button>
+        <button type="button" class="key op" data-act="op" data-value="/">÷</button>
+
+        <button type="button" class="key digit" data-act="digit" data-value="1">1</button>
+        <button type="button" class="key digit" data-act="digit" data-value="2">2</button>
+        <button type="button" class="key digit" data-act="digit" data-value="3">3</button>
+        <button type="button" class="key op" data-act="op" data-value="+">+</button>
+        <button type="button" class="key op" data-act="op" data-value="-">−</button>
+
+        <button type="button" class="key digit" data-act="sign">±</button>
+        <button type="button" class="key digit" data-act="digit" data-value="0">0</button>
+        <button type="button" class="key digit" data-act="digit" data-value=".">.</button>
+        <button type="button" class="key fn" data-act="const" data-value="ans">Ans</button>
+        <button type="button" class="key eq" data-act="eq">=</button>
+      </div>
+    </section>
+  </main>
+  <script src="calculator.js"></script>
+</body>
+</html>
